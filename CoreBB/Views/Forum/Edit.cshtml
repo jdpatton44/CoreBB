@@ -1,0 +1,57 @@
+﻿@using CoreBB.Models
+@model Forum
+
+@{
+    ViewData["Title"] = "Update Forum";
+}
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="@Model.Id" />
+    <input type="hidden" asp-for="@Model.OwnerId" />
+    <input type="hidden" asp-for="@Model.CreateDateTime" />
+    <div class="container col-6 offset-3" style="margin-top:120px">
+        <div class="card border-info">
+            <div class="card-header text-white bg-info">
+                <strong>Update Forum</strong>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Property</th>
+                        <th>Value</th>
+                    </tr>
+                    <tr>
+                        <td><strong>ID</strong></td>
+                        <td>@Model.Id</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Name</strong></td>
+                        <td>@Model.Name</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Owner</strong></td>
+                        <td><a asp-action="Detail" asp-controller="User" asp-route-name="@Model.Owner.Name">@Model.Owner.Name</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Description</strong></td>
+                        <td><textarea class="form-control" asp-for="Description"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Locked</strong></td>
+                        <td><input type="checkbox" asp-for="IsLocked" /></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Create Date</strong></td>
+                        <td>@Model.CreateDateTime.ToShortDateString()</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Operation</strong></td>
+                        <td>
+                            <input type="submit" class="btn-sm btn-success" value="Update" />
+                        </td>
+                    </tr>
+                </table> 
+            </div>
+        </div>
+    </div>
+</form>

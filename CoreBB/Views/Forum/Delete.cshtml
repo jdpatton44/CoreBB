@@ -1,0 +1,13 @@
+﻿@model CoreBB.Models.Forum
+
+@{
+    ViewData["Title"] = "Delete Forum";
+    ViewData["Mode"] = "ConfirmingDelete";
+}
+
+<h2 class="text-warning">Warning: All Topics in this forum will be deleted also!</h2>
+<form asp-action="Delete" method="post">
+<input type="hidden" asp-for="Id" />
+    @Html.Partial("_ForumDetail", Model)
+</form>
+

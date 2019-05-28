@@ -1,0 +1,44 @@
+﻿@model IEnumerable<CoreBB.Models.Forum>
+@inject CoreBB.Models.CoreBBContext _dbContext
+
+@{
+    ViewData["Title"] = "Forums";
+}
+
+<a class="btn-sm btn-success" asp-action="Create">Create a New Forum</a>
+
+<div class="container" style="margin-top:60px">
+    <div class="card border-info">
+        <div class="card-header text-white bg-info">
+            <strong>Forums</strong><span> - Total:@Model.Count()</span>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-striped table-hover">
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Since</th>
+                    <th>Topics</th>
+                    <th>Owner</th>
+                    <th>Locked</th>
+                    <th>Operation</th>
+                </tr>
+                @foreach (var f in Model)
+                {
+                    <tr>
+                        <td><a asp-controller="Topic" asp-action="Index" asp-rout-forumid="@f.Id">@f.Name</a> </td>
+                        <td>@f.Description</td>
+                        <td>@f.CreateDateTime.ToShortDateString()</td>
+                        <td>@_dbContext.Topic.Count(t => t.ForumId == f.Id && t.ReplyToTopicId == null)</td>
+                        <td><a asp-controller="User" asp-action="Detail" asp-route-name="@f.Owner.Name">@f.Owner.Name</a></td>
+                        <td><input type="checkbox" disabled="disabled" asp-for="@f.IsLocked" /></td>
+                        <td>
+                            <a class="btn-sm btn-primary" asp-action="Detail" asp-route-id="@f.Id">Details</a>
+                            <a class="btn-sm btn-success" asp-action="Topic" asp-rout-forumid="@f.Id">Enter</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+﻿@model CoreBB.Models.Topic
+
+@{
+    ViewBag.Title = "Update Topic";
+    ViewData["Mode"] = "Update Topic";
+    ViewData["SubmitButtonText"] = "Update";
+}
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="ForumId" />
+    <input type="hidden" asp-for="RootTopicId" />
+    <input type="hidden" asp-for="ReplyToTopicId" />
+    <input type="hidden" asp-for="PostDateTime" />
+    <input type="hidden" asp-for="OwnerId" />
+    <input type="hidden" asp-for="Id" />
+    @Html.Partial("_TopicEditing", Model)
+</form>

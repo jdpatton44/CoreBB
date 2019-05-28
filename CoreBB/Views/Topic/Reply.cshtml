@@ -1,0 +1,14 @@
+﻿@model CoreBB.Models.Topic
+@{
+
+    ViewBag.Title = "Reply Topic";
+    ViewData["Mode"] = $"Reply to Topic: {Model.ReplyToTopic.Title}";
+    ViewData["SubmitButtonText"] = "Reply";
+}
+
+<form asp-action="Reply" method="post">
+    <input type="hidden" asp-for="ForumId" />
+    <input type="hidden" asp-for="RootTopicId" />
+    <input type="hidden" asp-for="ReplyToTopicId" />
+    @Html.Partial("_TopicEditing", Model)
+</form>

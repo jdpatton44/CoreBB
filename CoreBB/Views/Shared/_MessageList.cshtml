@@ -1,0 +1,31 @@
+﻿@model IEnumerable<CoreBB.Models.Message>;
+
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>From</th>
+            <th>To</th>
+            <th>Date</th>
+            <th>Read</th>
+            <th>Title</th>
+            <th>Operation</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+            <tr>
+                <th>@m.FromUser.Name</th>
+                <th>@m.ToUser.Name</th>
+                <th>@m.SendDateTime.ToShortDateString()</th>
+                <th><input type="checkbox" disabled="disabled" asp-for="@m.IsRead" /></th>
+                <th>@m.Title</th>
+                <th>
+                    <a class="btn-sm btn-primary" asp-action="Detail" asp-route-id="@m.Id">Read</a>
+                    <a class="btn-sm btn-warning" asp-action="Delete" asp-route-id="@m.Id">Delete</a>
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>

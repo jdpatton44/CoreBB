@@ -1,0 +1,31 @@
+﻿@model IEnumerable<CoreBB.Models.Message>
+@inject CoreBB.Models.CoreBBContext _dbContext
+@{
+    ViewBag.Title = "Messages";
+    var user = _dbContext.User.SingleOrDefault(u => u.Name == User.Identity.Name);
+    var unread = Model.Where(m => m.ToUserId == user.Id && !m.IsRead);
+    var read = Model.Where(m => m.ToUserId == user.Id && m.IsRead);
+    var unreadSent = Model.Where(m => m.FromUserId == user.Id && !m.IsRead);
+    var readSent = Model.Where(m => m.FromUserId == user.Id && m.IsRead);
+}
+<div class="container" style="margin-top:60px">
+    <div class="card border-info">
+        <div class="card-header text-white bg-info">
+            <strong>Messages</strong>
+            <span>[Uread:@unread.Count()]</span>
+            <span>[Read:@read.Count()]</span>
+            <span>[Uread Sent:@unreadSent.Count()]</span>
+            <span>[Read Sent:@readSent.Count()]</span>
+        </div>
+        <div class="card-body">
+            <h3>Unread Messages</h3>
+            @Html.Partial("_MessageList", unread)
+            <h3>Read Messages</h3>
+            @Html.Partial("_MessageList", read)
+            <h3>Unread Sent Messages</h3>
+            @Html.Partial("_MessageList", unreadSent)
+            <h3>Read Sent Messages</h3>
+            @Html.Partial("_MessageList", readSent)
+        </div>
+    </div>
+</div>

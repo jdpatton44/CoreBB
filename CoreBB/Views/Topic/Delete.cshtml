@@ -1,0 +1,35 @@
+﻿@model CoreBB.Models.Topic
+
+@{
+    ViewData["Title"] = "Delete a Topic";
+}
+
+<form asp-action="Delete" method="post">
+<input type="hidden" asp-for="Id" />
+    <div class="container col-6 offset-3" style="margin-top:120px">
+        <div class="card border-info">
+            <div class="card-header text-white bg-info">
+                <strong>Confirm to Delete Topic [@Model.Title]</strong>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label asp-for="Title"></label>
+                    <input class="form-control" asp-for="Title" readonly="readonly" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Content"></label>
+                    <textarea asp-for="Content" class="form-control" style="min-height:120px" readonly="readonly"></textarea>
+                </div>
+                @if (Model.Id == Model.RootTopicId)
+                {
+                    <div class="form-group">
+                        <p class="text-danger">WARNING: This topic is a root topic.  Deleting this topic will cause all its dependent topics to be deleted.</p>
+                    </div>
+                }
+            </div>
+            <div class="card-footer">
+                <input type="submit" class="btn-sm btn-danger" value="Delete" />
+            </div>
+        </div>
+    </div>
+</form>

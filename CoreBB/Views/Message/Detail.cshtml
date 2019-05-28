@@ -1,0 +1,22 @@
+﻿@model CoreBB.Models.Message
+
+<div class="container col-6 offset-3">
+    <div class="card border-info">
+        <div class="card-header text-white bg-info">
+            <trong>@Model.Title</trong>
+            [From <a asp-action="Detail" asp-controller="User" asp-route-name="@Model.FromUser.Name">@Model.FromUser.Name</a>]
+            [From <a asp-action="Detail" asp-controller="User" asp-route-name="@Model.ToUser.Name">@(Model.ToUser?.Name)</a>]
+            [Sent @Model.SendDateTime.ToShortDateString()]
+        </div>
+        <div class="card-body">
+            <p>@Model.Content</p>
+        </div>
+        <div class="card-footer">
+            @if (Model.ToUser.Name  == User.Identity.Name){
+            <a class="btn-sm btn-success" asp-action="Create" asp-route-tousername="@Model.ToUser.Name">Reply</a>
+            }
+            <a class="btn-sm btn-warning" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+        </div>
+    </div>
+</div>
+

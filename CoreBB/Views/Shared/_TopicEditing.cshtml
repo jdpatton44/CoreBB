@@ -1,0 +1,30 @@
+﻿@model CoreBB.Models.Topic
+
+@{
+    ViewData["Title"] = "_TopicEditing";
+}
+
+<div class="container col-6 offset-3" style="margin-top:120px">
+    <div class="card border-info">
+        <div class="card-header text-white bg-info">
+            <strong>@ViewData["Mode"]</strong>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <label asp-for="Title"></label>
+                <input class="form-control" asp-for="Title" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Content"></label>
+                <textarea asp-for="Content" class="form-control" style="min-height:120px"></textarea>
+            </div>
+            <div class="form-group">
+                <span>Lock</span>
+                <input type="checkbox" asp-for="IsLocked" />
+            </div>
+        </div>
+        <div class="card-footer">
+            <input type="submit" class="btn-sm btn-success" value="@ViewData["SubmitButtonText"]" />
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+﻿
+﻿
+@{
+    ViewBag.Title = "Error";
+}
+
+<h2>HTTP @ViewBag.StatusCode Error</h2>
+<p>
+    <strong class="alert-warning">@ViewBag.Message</strong>
+</p>
+<hr />
+<h5>Debug Information:</h5>
+<p>
+    @ViewBag.StackTrace
+</p>

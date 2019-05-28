@@ -1,0 +1,13 @@
+﻿@model CoreBB.Models.Topic
+
+@{
+    ViewBag.Title = "New Topic";
+    ViewData["Mode"] = "Create New Topic";
+    ViewData["SubmitButtonText"] = "Post";
+}
+
+<form asp-action="Create" method="post">
+    <input type="hidden" asp-for="ForumId" />
+    @Html.Partial("_TopicEditing", Model)
+</form>
+
